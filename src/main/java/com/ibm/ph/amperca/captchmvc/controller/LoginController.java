@@ -12,5 +12,10 @@ public class LoginController {
 	public String about(Model model) {
 		return "login";
 	}
+	
+	@GetMapping("/login")
+	public String login(Model model) {
+		return "login";
+	}
 
 }

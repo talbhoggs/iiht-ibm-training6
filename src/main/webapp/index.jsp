@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
