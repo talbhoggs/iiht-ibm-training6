@@ -55,7 +55,7 @@ code {
 	<main role="main" class="flex-shrink-0">
 		<header>
 			<!-- Fixed navbar -->
-			<nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-success">
 				<a class="navbar-brand" href="#">IIHT-IBM</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarCollapse" aria-controls="navbarCollapse"

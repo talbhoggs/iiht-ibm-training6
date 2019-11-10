@@ -10,7 +10,7 @@ public class LoginController {
 	
 	@GetMapping("/about")
 	public String about(Model model) {
-		return "login";
+		return "about";
 	}
 	
 	@GetMapping("/login")
