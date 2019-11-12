@@ -62,11 +62,10 @@ code {
 					aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<div class="navbar-collapse collapse w-100 order-3 dual-collapse2"
-					sec:authorize="isAnonymous()">
+				<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-						<li class="nav-item"><a class="nav-link">Sign Up</a></li>
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/about" class="nav-link">About</a></li>
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/signup" class="nav-link">Sign Up</a></li>
 					</ul>
 				</div>
 			</nav>
