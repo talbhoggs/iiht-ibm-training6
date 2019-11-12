@@ -65,7 +65,7 @@ code {
 				<div class="navbar-collapse collapse w-100 order-3 dual-collapse2"
 					sec:authorize="isAnonymous()">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link">About</a></li>
+						<li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 						<li class="nav-item"><a class="nav-link">Sign Up</a></li>
 					</ul>
 				</div>
