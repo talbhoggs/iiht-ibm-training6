@@ -13,36 +13,36 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class CaptchWebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-	@Override
-	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] { WebSecurityConfig.class };
-	}
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class<?>[] { WebSecurityConfig.class };
+    }
 
-	@Override
-	protected Class<?>[] getServletConfigClasses() {
-		return new Class<?>[] { Config.class };
-	}
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class<?>[] { Config.class };
+    }
 
-	@Override
-	protected String[] getServletMappings() {
-		return new String[] { "/" };
-	}
+    @Override
+    protected String[] getServletMappings() {
+        return new String[] { "/" };
+    }
 
-	// configuration for spring security
-	// take note of the targetbean name
-	@Override
-	protected javax.servlet.Filter[] getServletFilters() {
-		DelegatingFilterProxy delegateFilterProxy = new DelegatingFilterProxy();
-		delegateFilterProxy.setTargetBeanName("springSecurityFilterChain");
-		return new Filter[] { delegateFilterProxy };
-	}
+    // configuration for spring security
+    // take note of the targetbean name
+    @Override
+    protected javax.servlet.Filter[] getServletFilters() {
+        DelegatingFilterProxy delegateFilterProxy = new DelegatingFilterProxy();
+        delegateFilterProxy.setTargetBeanName("springSecurityFilterChain");
+        return new Filter[] { delegateFilterProxy };
+    }
 
-	// configuration for h2-database
-	@Override
-	public void onStartup(ServletContext servletContext) throws ServletException {
-		super.onStartup(servletContext);
-		ServletRegistration.Dynamic servlet = servletContext.addServlet("h2-console", new WebServlet());
-		servlet.setLoadOnStartup(2);
-		servlet.addMapping("/console/*");
-	}
+    // configuration for h2-database
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+        ServletRegistration.Dynamic servlet = servletContext.addServlet("h2-console", new WebServlet());
+        servlet.setLoadOnStartup(2);
+        servlet.addMapping("/console/*");
+    }
 }

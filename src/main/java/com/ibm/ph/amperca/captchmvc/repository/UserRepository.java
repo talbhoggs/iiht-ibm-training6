@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.ibm.ph.amperca.captchmvc.model.User;
 
-public interface UserRepository extends CrudRepository<User, Long>{
+public interface UserRepository extends CrudRepository<User, Long> {
 
     public User findByEmail(String email);
 

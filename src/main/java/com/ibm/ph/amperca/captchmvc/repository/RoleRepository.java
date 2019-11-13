@@ -7,7 +7,7 @@ import com.ibm.ph.amperca.captchmvc.model.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
-	@Query("SELECT t FROM Role t where t.name = :name")
-	Role findByRoleName(String name);
+    @Query("SELECT t FROM Role t where t.name = :name")
+    Role findByRoleName(String name);
 
 }
