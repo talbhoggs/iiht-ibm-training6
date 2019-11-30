@@ -30,10 +30,6 @@ public class AccountController {
     @GetMapping("/signup")
     public String showSignUpForm(Model model) {
       User user = new User();
-      user.setName("Charles");
-      user.setEmail("email@email.com");
-      user.setUserName("talbhoggs");
-      user.setPassword("talbhoggs");
       model.addAttribute("user", user);
       return "signup";
     }
