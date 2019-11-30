@@ -23,10 +23,5 @@ public class LoginController {
         return "main";
     }
 
-    @GetMapping("/signup")
-    public String showSignUpForm(Model model) {
-
-        return "signup";
-    }
 
 }

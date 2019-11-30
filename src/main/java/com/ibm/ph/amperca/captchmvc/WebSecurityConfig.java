@@ -23,10 +23,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/login").permitAll().antMatchers("/about").permitAll().antMatchers("/signup").permitAll()
+	    .antMatchers("/login/**").permitAll().antMatchers("/signup/**").permitAll().antMatchers("/webjars/**").permitAll().antMatchers("/captcha").permitAll()
 		        .antMatchers("/h2-console/**").permitAll().anyRequest().authenticated().and().formLogin()
 		        .loginPage("/login").defaultSuccessUrl("/main", true).and().logout()
 		        .logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll().and().csrf().disable();
-
+		  http.headers().frameOptions().disable();
 	}
 
 	@Bean
@@ -36,6 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/**/*.html", "/**/*.css", "/**/*.js", "/**/*.{png,jpg,jpeg,svg.ico}");
+		web.ignoring().antMatchers("/resources/**", "/static/**","/webjars/**","/**/*.html", "/**/*.css", "/**/*.js", "/**/*.{png,jpg,jpeg,svg.ico}");
 	}
 }

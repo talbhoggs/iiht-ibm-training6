@@ -1,4 +1,5 @@
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html>
 <html>
 <head class="h-100">
@@ -6,10 +7,12 @@
 <meta name="viewport"
     content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Login Page</title>
-<link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+<link
+    href="${pageContext.request.contextPath}/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
     type="text/css" rel="stylesheet" />
-<link href="webjars/font-awesome/5.10.1/css/all.css" type="text/css"
-    rel="stylesheet" />
+<link
+    href="${pageContext.request.contextPath}/webjars/font-awesome/5.10.1/css/all.css"
+    type="text/css" rel="stylesheet" />
 
 </head>
 
@@ -83,17 +86,23 @@ code {
 
                 <div class="col-5">
                     <h4 class="mt-5">Sign up</h4>
-                    <form method="post">
+                    <form:form
+                        action="${pageContext.request.contextPath}/signup/submit"
+                        method="POST" modelAttribute="user">
                         <div class="form-group row">
                             <label for="name"
                                 class="col-sm-3 col-form-label">Name:
                             </label>
                             <div class="col-sm-9 input-icons">
-                                <i class="fas fa-user icon"></i><input
+                                <i class="fas fa-user icon"></i>
+                                <form:input path="name"
+                                    cssClass="form-control input-field" />
+                                <!-- <input
                                     type="text"
                                     class="form-control input-field"
-                                    id="name" /> <span
-                                    class="text-danger"></span>
+                                    id="name" /> -->
+                                <span class="text-danger"><form:errors
+                                        path="name" /></span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -101,11 +110,15 @@ code {
                                 class="col-sm-3 col-form-label">Email:
                             </label>
                             <div class="col-sm-9 input-icons">
-                                <i class="fas fa-envelope icon"></i><input
+                                <i class="fas fa-envelope icon"></i>
+                                <form:input path="email"
+                                    cssClass="form-control input-field" />
+                                <!-- <input
                                     type="text"
                                     class="form-control input-field"
-                                    id="email"></input> <span
-                                    class="text-danger"></span>
+                                    id="email"></input>  -->
+                                <span class="text-danger"><form:errors
+                                        path="email" /></span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -113,37 +126,47 @@ code {
                                 class="col-sm-3 col-form-label">Username:
                             </label>
                             <div class="col-sm-9 input-icons">
-                                <i class="far fa-user icon"></i><input
+                                <i class="far fa-user icon"></i>
+                                <form:input path="userName"
+                                    cssClass="form-control input-field" />
+                                <!-- <input
                                     type="text"
                                     class="form-control input-field"
-                                    id="userName"></input> <span
-                                    class="text-danger"></span>
+                                    id="userName"></input> -->
+                                <span class="text-danger"><form:errors
+                                        path="userName" /></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="password"
                                 class="col-sm-3 col-form-label">Password:</label>
                             <div class="col-sm-9 input-icons">
-                                <i class="fas fa-unlock-alt icon"></i><input
+                                <i class="fas fa-unlock-alt icon"></i>
+                                <!-- <input
                                     type="password"
                                     class="form-control input-field"
-                                    id="password" /> <span
-                                    class="text-danger"></span>
+                                    id="password" />  -->
+                                <form:password path="password"
+                                    cssClass="form-control input-field" />
+                                <span class="text-danger"><form:errors
+                                        path="password" /></span>
                             </div>
                         </div>
-                        <!-- 
-					<div class="form-group row">
-						<label for="password" class="col-sm-3 col-form-label">Captcha:</label>
-						<div class="col-sm-5">
-							<img alt="captcha">
-							<br /><br />
-							<input type="password"
-								class="form-control" id="captcha"
-								> <span class="text-danger"
-								>Invalid Captcha</span>
-						</div>
-					</div>
-					 -->
+
+                        <div class="form-group row">
+                            <label for="password"
+                                class="col-sm-3 col-form-label">Captcha:</label>
+                            <div class="col-sm-5">
+                                <img alt="captcha"
+                                    src="${pageContext.request.contextPath}/captcha">
+                                <br />
+                                <br />
+                                <form:input path="captcha"
+                                    cssClass="form-control input-field" />
+                                <span class="text-danger"> </span>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="float-left">
                                 <button type="submit"
@@ -157,7 +180,7 @@ code {
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>
