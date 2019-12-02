@@ -163,7 +163,7 @@ code {
                                 <br />
                                 <form:input path="captcha"
                                     cssClass="form-control input-field" />
-                                <span class="text-danger"> </span>
+                                <span class="text-danger">Invalid Captcha</span>
                             </div>
                         </div>
 
