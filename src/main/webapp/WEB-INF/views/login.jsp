@@ -1,3 +1,4 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head class="h-100">
@@ -85,39 +86,54 @@ code {
 
                 <div class="col-5">
                     <h4 class="mt-5">Login</h4>
-                    <form method="post">
+                    <form:form action="${pageContext.request.contextPath}/login/submit"
+                        method="POST" modelAttribute="user">
                         <div class="form-group row">
                             <label for="username"
                                 class="col-sm-3 col-form-label">Username:
                             </label>
                             <div class="col-sm-9 input-icons">
-                                <i class="far fa-user icon"></i></i><input
-                                    type="text"
-                                    class="form-control input-field"
-                                    id="username" name="username"
-                                    placeholder="">
+                                <i class="far fa-user icon"></i><form:input path="userName"
+                                    cssClass="form-control input-field" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="password"
                                 class="col-sm-3 col-form-label">Password:</label>
                             <div class="col-sm-9 input-icons">
-                                <i class="fas fa-unlock-alt icon"></i><input
-                                    type="password"
-                                    class="form-control input-field"
-                                    id="password" name="password"
-                                    placeholder="">
+                                <i class="fas fa-unlock-alt icon"></i><form:password path="password"
+                                    cssClass="form-control input-field" />
                             </div>
                         </div>
-                        <!--
+                        <%
+                        String error = request.getParameter("error");
+                        String captchError = request.getParameter("captchError");
+                        %>
+
+
 						<div class="form-group row">
 							<label for="password" class="col-sm-3 col-form-label">Captcha:</label>
 							<div class="col-sm-5">
-								<img id="captcha" alt="captcha"> <br />
+								   <img alt="captcha"
+                                    src="${pageContext.request.contextPath}/captcha">
+                                 <br />
 								<br /> <input type="password" class="form-control" id="captcha"
-									name="captcha" /> <span class="text-danger">Invalid Captcha</span>
+									name="captcha" />
+                                    <% if (captchError != null && captchError.equals("true")) { %>
+                                    <span class="text-danger">Invalid Captcha</span>
+                                    <% } %>
 							</div>
 						</div>
+
+
+                        <div class="form-group row">
+                            <div class="col-sm-12 d-flex justify-content-center">
+                                <% if (error != null && error.equals("true")) { %>
+                                <span class="text-danger"> Email or Password invalid, please verify </span>
+                                <% } %>
+                            </div>
+                        </div>
+                        <!--
 						<div class="form-group row">
 							<div class="col-sm-12 d-flex justify-content-center">
 								<span class="text-danger"> Email
@@ -151,7 +167,7 @@ code {
                             </div>
                         </div>
 
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>
