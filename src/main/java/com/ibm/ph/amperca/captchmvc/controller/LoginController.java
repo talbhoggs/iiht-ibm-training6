@@ -3,6 +3,7 @@ package com.ibm.ph.amperca.captchmvc.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -14,9 +15,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ibm.ph.amperca.captchmvc.model.User;
+import com.ibm.ph.amperca.captchmvc.service.SecurityService;
+import com.ibm.ph.amperca.captchmvc.service.UserService;
 
 @Controller
 public class LoginController {
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private SecurityService securityService;
 
     @GetMapping("/about")
     public String about(Model model) {
@@ -31,27 +40,24 @@ public class LoginController {
     }
 
     @PostMapping("/login/submit")
-    public String submitSignUpForm(@RequestParam("userName") String username,
-        @RequestParam("password") String password, @RequestParam("captcha") String captcha,
-        HttpServletRequest request, ModelMap modelMap) {
+    public String submitSignUpForm(@RequestParam("userName") String username, @RequestParam("password") String password,
+            @RequestParam("captcha") String captcha, HttpServletRequest request, ModelMap modelMap) {
 
-      if (username.trim().isEmpty() || password.trim().isEmpty()) {
+        if (username.trim().isEmpty() || password.trim().isEmpty()) {
+            return "redirect:/login?error=true";
+        }
+
+        if (!captcha.equalsIgnoreCase((String) request.getSession().getAttribute("captchValueSession"))) {
+            return "redirect:/login?captchError=true";
+        }
+
+        boolean isAuthenticated = securityService.authenticate(username, password);
+
+        if (isAuthenticated) {
+            return "redirect:/main";
+        }
+
         return "redirect:/login?error=true";
-      }
-
-      if (!captcha
-          .equalsIgnoreCase((String) request.getSession().getAttribute("captchValueSession"))) {
-        return "redirect:/login?captchError=true";
-      }
-
-      /*boolean isAuthenticated = securityService.authenticate(username, password);
-
-      if (isAuthenticated) {
-        return "redirect:/main";
-      }
-      */
-
-      return "redirect:/login?error=true";
     }
 
     @GetMapping("/main")
@@ -61,22 +67,22 @@ public class LoginController {
 
     @GetMapping("/admin/main")
     public String adminPage() {
-      return "admin";
+        return "admin";
     }
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
-      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-      if (auth != null) {
-        auth.setAuthenticated(false);
-        new SecurityContextLogoutHandler().logout(request, response, auth);
-      }
-      return "redirect:/login?logout";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            auth.setAuthenticated(false);
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login?logout";
     }
 
     @GetMapping("/access-denied")
     public String accessDeniedPage(HttpServletRequest request, HttpServletResponse response) {
-      return "redirect:/error";
+        return "redirect:/error";
     }
 
 }
