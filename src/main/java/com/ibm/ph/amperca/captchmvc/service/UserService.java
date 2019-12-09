@@ -1,7 +1,10 @@
 package com.ibm.ph.amperca.captchmvc.service;
 
+import org.springframework.stereotype.Service;
+
 import com.ibm.ph.amperca.captchmvc.model.User;
 
+@Service
 public interface UserService {
     User saveUser( User user);
     User updateUser( User user);
