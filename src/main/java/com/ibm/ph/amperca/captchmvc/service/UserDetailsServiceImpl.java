@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import com.ibm.ph.amperca.captchmvc.model.User;
+
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-      User user = userService.findByUserName(username);
+        com.ibm.ph.amperca.captchmvc.model.User user = userService.findByUserName(username);
       if (user == null) {
         throw new UsernameNotFoundException("User " + username + " not found");
       }
