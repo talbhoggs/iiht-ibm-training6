@@ -7,7 +7,7 @@
 	<packaging>war</packaging>
 	<properties>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
-		<springframework.version>5.2.1.RELEASE</springframework.version>
+		<springframework.version>5.2.20.RELEASE</springframework.version>
 		<webjar.boostrap.version>4.3.1</webjar.boostrap.version>
 		<webjar.jquery.version>3.4.1</webjar.jquery.version>
 		<webjar.fontawesome.version>5.10.1</webjar.fontawesome.version>
